@@ -1,0 +1,176 @@
+<templateSet group="symfony">
+  <template name="formhandle" value="$form = $this-&gt;createForm($CLASSNAME$::class);&#10;&#10;$form-&gt;handleRequest($request);&#10;if ($form-&gt;isSubmitted() &amp;&amp; $form-&gt;isValid()) {&#10;    // todo - do some work, like saving stuff&#10;&#10;    $this-&gt;addFlash('success', '$SUCCESSMESSAGE$');&#10;&#10;    return $this-&gt;redirectToRoute('$ROUTENAME$', []);&#10;}" description="Adds controller form-handling code" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASSNAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="SUCCESSMESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ROUTENAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="formrow" value="{{ form_row(form.$FIELD$) }}" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="formrowfull" value="&lt;div class=&quot;form-control&quot;&gt;&#10;    {{ form_label(form.$FIELD$) }}&#10;    {{ form_widget(form.$FIELD$) }}&#10;    {{ form_errors(form.$FIELD$) }}&#10;&lt;/div&gt;" description="Renders widget/label/errors" toReformat="true" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="findrepo" value="$this-&gt;getDoctrine()&#10;    -&gt;getRepository('$REPO$')-&gt;$METHOD$($ARG$);" description="Queries from a doctrine repository in a controller" toReformat="true" toShortenFQNames="true">
+    <variable name="REPO" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ARG" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="rendertwig" value="return $this-&gt;render('$TEMPLATE$');$END$&#10;" description="Renders a Twig template from a controller" toReformat="true" toShortenFQNames="true">
+    <variable name="TEMPLATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="404unless" value="if ($CONDITION$) {&#10;    throw $this-&gt;createNotFoundException($MESSAGE$);&#10;}" description="404 if statement for your controller" toReformat="true" toShortenFQNames="true">
+    <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="include" value="{{ include('$TEMPLATE$') }}" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="TEMPLATE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="method" value="@Method(&quot;$METHOD$&quot;)" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP Comment" value="true" />
+    </context>
+  </template>
+  <template name="path" value="{{ path('$ROUTE$', { $END$ }) }}" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="ROUTE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="route" value="@Route(&quot;/$PATH$&quot;, name=&quot;$NAME$&quot;)" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="snakeCase(PATH)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP Comment" value="true" />
+    </context>
+  </template>
+  <template name="action" value="/**&#10; * @Route(&quot;/$NAME$&quot;, name=&quot;$NAME$&quot;)&#10; */&#10;public function $NAME$Action()&#10;{&#10;    $END$&#10;}" description="Creates a controller action." toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="service" value="$NAME$:&#10;    class: $CLASS$&#10;    arguments:&#10;        - '$ARG1$'" description="Creates a YML service" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NAME" expression="snakeCase(CLASS)" defaultValue="service_name" alwaysStopAt="true" />
+    <variable name="ARG1" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="tags" value="tags:&#10;    - { name: $TAGNAME$ }" description="Yaml service tags" toReformat="true" toShortenFQNames="true">
+    <variable name="TAGNAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="getem" value="$em = $this-&gt;getDoctrine()-&gt;getManager();" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="getrepo" value="$em-&gt;getRepository('$ENTITY$');" toReformat="false" toShortenFQNames="true">
+    <variable name="ENTITY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="doctrinecolumn" value="/**&#10; * @ORM\Column(type=&quot;$TYPE$&quot;)&#10; */&#10;private $$$PROPERTYNAME$;" description="Adds a property with @ORM annotations" toReformat="false" toShortenFQNames="true">
+    <variable name="PROPERTYNAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="asset" value="{{ asset('$PATH$') }}" toReformat="false" toShortenFQNames="true">
+    <variable name="PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="asseticjs" value="{% javascripts&#10;    '$PATH$'$END$&#10;%}&#10;    &lt;script type=&quot;text/javascript&quot; src=&quot;{{ asset_url }}&quot;&gt;&lt;/script&gt;&#10;{% endjavascripts %}" toReformat="false" toShortenFQNames="true">
+    <variable name="PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="asseticcss" value="{% stylesheets&#10;    '$PATH$'$END$&#10;    filter='cssrewrite'&#10;%}&#10;    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ asset_url }}&quot; /&gt;&#10;{% endstylesheets %}" toReformat="false" toShortenFQNames="true">
+    <variable name="PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+  <template name="yamlroute" value="$NAME$:&#10;    path:   /$PATH$&#10;    defaults:  { _controller: $CONTROLLER$ }" description="YAML route" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="PATH" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONTROLLER" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="querybuilder" value=" $em = $this-&gt;getDoctrine()-&gt;getManager();&#10;$query = $em-&gt;createQueryBuilder()&#10;        -&gt;select(array('prod', 'cat'))&#10;        -&gt;from(&quot;AppBundle:Prodotti&quot;, &quot;prod&quot;)&#10;        -&gt;Join('prod.categorie', 'cat')&#10;        -&gt;where('prod.id = :id')&#10;        -&gt;setParameter('id', $idProdotto)&#10;        -&gt;getQuery()&#10;        -&gt;getResult();" description="Query objects in repositories using query builder" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="trans" value="{% trans %}$MESSAGE${% endtrans %}" description="Allows fast entering of translated messages" toReformat="false" toShortenFQNames="true">
+    <variable name="MESSAGE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="item" value="{{ item.$name$ }}" description="item for twig" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="trans-surround" value="{% trans %}$SELECTION${% endtrans %}$END$" description="translated messages in surround templates" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="grassetto-surround" value="&lt;b&gt;$SELECTION$&lt;/b&gt;$END$" description="grassetto" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="XML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+  <template name="form setDefaults" value="$resolver-&gt;setDefaults(array(&#10;    'data_class' =&gt; 'AppBundle\Entity\Admin\Prodotti'&#10;));" description="form setDefaults" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="p-surround" value="&lt;p&gt;$SELECTION$&lt;/p&gt;$END$" description="paragrafo surround" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+      <option name="Twig" value="true" />
+    </context>
+  </template>
+</templateSet>
